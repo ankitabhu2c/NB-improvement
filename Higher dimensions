@@ -1,0 +1,15 @@
+import numpy as np
+import pandas as pd
+import giotto
+
+# Load the time series data
+df = pd.read_csv('time_series_data.csv', index_col='Date', parse_dates=True)
+
+# Construct a time delay embedding
+X = giotto.construct_time_delay_embedding(df['Close'].values, delay=10)
+
+# Compute the persistent homology of the time delay embedding
+homology = giotto.compute_persistent_homology(X)
+
+# Visualize the persistent homology in a higher dimension
+giotto.visualize_persistent_homology(homology, dimensions=[0, 1])
